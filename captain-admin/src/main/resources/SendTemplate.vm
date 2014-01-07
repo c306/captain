@@ -1,0 +1,17 @@
+<html>
+<style type="text/css">
+.logo {
+	height:97px;
+	background-image:url(http://anyshopstyle.cn/image/logo.png);
+	background-repeat:no-repeat;
+}
+.borderline {
+    border-bottom: 2px solid #848282;
+    height:0px;
+    width: 100%;
+}
+</style>
+<body>
+$!{mailContent}
+</body>
+</html>

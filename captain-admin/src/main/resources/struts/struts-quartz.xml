@@ -1,0 +1,38 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- Quartz -->
+	<package name="quartz" namespace="/quartz" extends="captain-default">
+
+		<action name="scheduler" class="com.c306.core.quartz.scheduler.action.SchedulerAction">
+<!-- 			<interceptor-ref name="token"> -->
+<!-- 				<param name="excludeMethods">list,edit</param> -->
+<!-- 			</interceptor-ref> -->
+<!-- 			<interceptor-ref name="defaultStack" /> -->
+			<result name="instanceList">/jsp/admin/quartz/list_instance.jsp</result>
+			<result name="jobList">/jsp/admin/quartz/list_job.jsp</result>
+			<result name="jobEdit">/jsp/admin/quartz/edit_job.jsp</result>
+			<result name="triggerList">/jsp/admin/quartz/list_trigger.jsp</result>
+			<result name="jobMonitor">/jsp/admin/quartz/jobMonitor.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="includeProperties">success,^jsonMap\..*</param>
+				<param name="excludeProperties"></param>
+				<param name="enableSMD">false</param>
+				<param name="enableGZIP">true</param>
+				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<!-- jobs log -->
+		<action name="joblog" class="com.c306.core.quartz.log.action.JobLogAction">
+			<result name="list">/jsp/admin/quartz/list_joblog.jsp</result>
+		</action>
+
+	</package>
+
+
+</struts>

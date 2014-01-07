@@ -1,0 +1,189 @@
+@charset "utf-8";
+
+
+/**** Clearfix ****/
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+/* normal size */
+/*96*n+15*(n-1)*/
+.textcontent .col1 { width: 96px; }
+.textcontent .col2 { width: 207px; }
+.textcontent .col3 { width: 318px; }
+.textcontent .col4 { width: 429px; }
+.textcontent .col5 { width: 540px; }
+.textcontent .col6 { width: 651px; }
+.textcontent .col7 { width: 762px; }
+.textcontent .col8 { width: 873px; }
+
+/*92*n+14*(n-1)*/
+.textcontent .row1 { height: 92px; }
+.textcontent .row2 { height: 198px; }
+.textcontent .row3 { height: 304px; }
+.textcontent .row4 { height: 410px; }
+.textcontent .row5 { height: 516px; }
+.textcontent .row6 { height: 622px; }
+.textcontent .row7 { height: 728px; }
+.textcontent .row8 { height: 834px; }
+
+.textcontent .item{
+	cursor:move;
+	float:left;
+	margin-left:8px;
+	margin-right:7px;
+	margin-top:7px;
+	margin-bottom:7px;
+	background-color: rgb(238, 238, 238);
+}
+
+/* warn css */
+div.overlapped {
+	border: dashed 1px #FF0000 !important;
+	background-color: #FFeeee;
+}
+
+/* zoom size */
+.textcontent_half{
+	overflow:hidden;
+	width:432px;
+	height:676px;
+	float:left;
+	border:8px solid rgb(238, 238, 238);
+	margin-left: 8px;
+	margin-top: 7px;
+	padding-left: 4px;
+	position: relative;
+}
+
+.textcontent_half .item{
+	cursor:move;
+	/*float:left;*/
+	margin: 3px 3px 3px 2px;
+	background-color: rgb(238, 238, 238);
+	position: absolute;
+}
+
+.textcontent_half .item img{
+	max-width: 100%;
+	max-height: 100%;
+	border: 0px;
+}
+
+/*48*n+6*(n-1)*/
+.textcontent_half .col1 { width: 48px; }
+.textcontent_half .col2 { width: 102px; }
+.textcontent_half .col3 { width: 156px; }
+.textcontent_half .col4 { width: 210px; }
+.textcontent_half .col5 { width: 264px; }
+.textcontent_half .col6 { width: 318px; }
+.textcontent_half .col7 { width: 372px; }
+.textcontent_half .col8 { width: 426px; }
+
+/*46*n+6*(n-1)*/
+.textcontent_half .row1 { height: 46px; }
+.textcontent_half .row2 { height: 98px; }
+.textcontent_half .row3 { height: 150px; }
+.textcontent_half .row4 { height: 202px; }
+.textcontent_half .row5 { height: 254px; }
+.textcontent_half .row6 { height: 306px; }
+.textcontent_half .row7 { height: 358px; }
+.textcontent_half .row8 { height: 410px; }
+
+
+/***** candidatecontainer ******/
+#candidatecontainer {
+	float:right;
+	width:350px;
+	height: 676px;
+	border:8px solid rgb(238, 238, 238);
+	margin-top: 7px;
+	margin-right: 8px;
+	overflow-y: scroll;
+}
+.candidate-fixed {
+	position: fixed !important;;
+	top: 40px;
+	right: 46px;
+}
+/* candidate size */
+/*96*n+15*(n-1)
+#candidatecontainer .col1 { width: 96px; }
+#candidatecontainer .col2 { width: 207px; }
+#candidatecontainer .col3 { width: 318px; }
+#candidatecontainer .col4 { width: 429px; }
+#candidatecontainer .col5 { width: 540px; }
+#candidatecontainer .col6 { width: 651px; }
+#candidatecontainer .col7 { width: 762px; }
+#candidatecontainer .col8 { width: 873px; }
+*/
+/*92*n+14*(n-1)
+#candidatecontainer .row1 { height: 92px; }
+#candidatecontainer .row2 { height: 198px; }
+#candidatecontainer .row3 { height: 304px; }
+#candidatecontainer .row4 { height: 410px; }
+#candidatecontainer .row5 { height: 516px; }
+#candidatecontainer .row6 { height: 622px; }
+#candidatecontainer .row7 { height: 728px; }
+#candidatecontainer .row8 { height: 834px; }
+*/
+#candidatecontainer .item{
+	cursor:move;
+	float:left;
+	margin-left:8px;
+	margin-right:7px;
+	margin-top:7px;
+	margin-bottom:7px;
+	background-color: rgb(238, 238, 238);
+	width: 96px;
+	height: 112px;
+	position: relative;
+}
+#candidatecontainer .item img{
+	width: auto;
+	max-width: 100px;/* 要大于96 为了让 jquery aeImageResize 重新计算大小*/
+	border: 0px;
+}
+#candidatecontainer .item div{
+	position:absolute;
+	bottom:1px;
+	width: 100%;
+	text-align: center;
+	background-color: #f7f7f9;
+}
+
+
+
+/***** settings ******/
+.setting_block {
+	width: 96px;height: 92px;
+	background-color: #ffffff;
+	border: 1px solid #3d3d3d;
+}
+.setting_grid {
+	background-image: url("../images/bg_middle1.png");
+	background-repeat: repeat;
+	background-position: -64px -52px;
+}
+.setting_bg_img {
+	background-image: url("../images/bg_noise_small_suqare.jpg");
+	background-repeat: repeat;
+}
+
+
+
+
+
+/***** Tiny Scrollbar start ******/
+/* Tiny Scrollbar */
+#candidatecontainer {/* width: 520px; margin: 20px 0 10px; */}
+#candidatecontainer .viewport { overflow: hidden; position: relative; height: 676px;}
+#candidatecontainer .overview { list-style: none; position: absolute; left: 0; top: 0; padding: 0; margin: 0; width: 100%; }
+#candidatecontainer .scrollbar{ background: transparent url(../common/jquery/tinyscrollbar/bg-scrollbar-track-y.png) no-repeat 0 0; position: relative; background-position: 0 0; float: right; width: 15px; }
+#candidatecontainer .track { background: transparent url(../common/jquery/tinyscrollbar/bg-scrollbar-trackend-y.png) no-repeat 0 100%; background-color:#DEDEDE; height: 100%; width:13px; position: relative; padding: 0 1px; }
+#candidatecontainer .thumb { background: transparent url(../common/jquery/tinyscrollbar/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; height: 20px; width: 25px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left: -5px; }
+#candidatecontainer .thumb .end { background: transparent url(../common/jquery/tinyscrollbar/bg-scrollbar-thumb-y.png) no-repeat 50% 0; overflow: hidden; height: 5px; width: 25px; }
+#candidatecontainer .disable { display: none; }
+.noSelect { user-select: none; -o-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; }
+
+/***** Tiny Scrollbar end/// ******/

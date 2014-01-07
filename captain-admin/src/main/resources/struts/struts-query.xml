@@ -1,0 +1,31 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="query" namespace="/query"  extends="struts-default">
+		<interceptors>
+			<interceptor name="LoginInterceptor" class="com.c306.core.interceptor.SimpleInterceptor"/>
+			<interceptor-stack name="I18nLoginStack">
+				<interceptor-ref name="LoginInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="I18nLoginStack"/>
+		<action name="bar" class="com.c306.code.page.action.BarAction">
+			<result name="main.jsp">/jsp/query/main.jsp</result>
+		</action>
+		<action name="artle" class="com.c306.code.page.action.ArticleAction">
+			<result name="architecture.jsp">/jsp/query/architecture.jsp</result>
+			<result name="products.jsp">/jsp/query/products.jsp</result>
+			<result name="people.jsp">/jsp/query/people.jsp</result>
+			<result name="practice.jsp">/jsp/query/practice.jsp</result>
+			<result name="people_detail.jsp">/jsp/query/people_detail.jsp</result>
+			<result name="product_item.jsp">/jsp/query/product_item.jsp</result>
+			<result name="reseach_item.jsp">/jsp/query/reseach_item.jsp</result>
+		</action>
+		<action name="email" class="com.c306.code.order.action.OrderAction">
+		</action>
+		
+	</package>
+</struts>

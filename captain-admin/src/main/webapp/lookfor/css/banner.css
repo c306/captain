@@ -1,0 +1,8 @@
+.td_f a img{padding: 0px;margin: 0px;}
+.directionPrev{position:absolute;left:1px;top:45%;width:10px;height:17px;z-index:9;cursor:pointer;background:url(../images/skins/p_left.png) no-repeat;}
+.directionNext{position:absolute;right:1px;top:45%;width:10px;height:17px;z-index:9;cursor:pointer;background:url(../images/skins/p_right.png) no-repeat;}
+.product_detailclose{position:absolute;width:11px;height:11px;top:3px;right:3px;z-index:9;cursor:pointer;background:url(../images/skins/p_close.png) no-repeat;}
+
+.middlePicSlider{width:359px;height:333px;}
+.middlePicSlider01{width:359px;height:333px;text-align:center;background-color:#F0F1F0;display:table-cell;vertical-align:middle;}
+

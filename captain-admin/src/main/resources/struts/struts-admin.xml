@@ -1,0 +1,219 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="admin" namespace="/admin" extends="captain-default">
+		<interceptors>
+		
+<!-- 			<interceptor name="LoginInterceptor" class="com.c306.core.interceptor.SimpleInterceptor"/> -->
+			
+			<!-- copied form dstruts-default.xml and modify: remove validation, add LoginInterceptor -->
+            <interceptor-stack name="defaultStack">
+<!-- 				<interceptor-ref name="LoginInterceptor" /> -->
+                <interceptor-ref name="exception"/>
+                <interceptor-ref name="alias"/>
+                <interceptor-ref name="servletConfig"/>
+                <interceptor-ref name="i18n"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="chain"/>
+                <interceptor-ref name="debugging"/>
+                <interceptor-ref name="scopedModelDriven"/>
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="fileUpload"/>
+                <interceptor-ref name="checkbox"/>
+                <interceptor-ref name="multiselect"/>
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="actionMappingParams"/>
+                <interceptor-ref name="params">
+                  <param name="excludeParams">dojo\..*,^struts\..*</param>
+                </interceptor-ref>
+                <interceptor-ref name="conversionError"/>
+            </interceptor-stack>
+			
+			<interceptor-stack name="tokenStack">
+				<interceptor-ref name="token">
+                    <!-- <param name="excludeMethods">list,edit,categories,exportData,dialogSearch,preview,ajaxOrderLineItemProcess,shoppingHistory</param> -->
+                    <param name="includeMethods">save*</param>
+                </interceptor-ref>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+			
+		</interceptors>
+		
+ 		<default-interceptor-ref name="defaultStack"/>
+		
+		<global-results>
+			<result name="invalid.token">/error.jsp</result>
+		</global-results>
+		
+		<action name="html_*" class="com.opensymphony.xwork2.ActionSupport">
+			<result name="success">/jsp/admin/{1}.jsp</result>
+		</action>
+		
+		<action name="multiplefileupload" class="com.c306.core.fileupload.MultipleFileUploadUsingListAction">
+			<result name="input">/error.jsp</result>
+			<result name="success">/jsp/admin/upload-success.jsp</result>
+		</action>
+		<action name="upload" class="com.c306.core.fileupload.FileUploadAction">
+			<interceptor-ref name="fileUploadStack"/>
+			<result name="list">/common/gallery_upload.jsp</result>
+			<result name="flashFileUpload">/common/gallery_flashfileupload.jsp</result>
+			<result name="success">/jsp/admin/gallery-success.jsp</result>
+			<result name="uploadsuccess" type="json">
+				<param name="ignoreHierarchy">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="excludeProperties">upload</param>
+				<param name="includeProperties">uploadparams,uploadSuccessItem,uploadSuccessItem.*</param>
+				<param name="enableSMD">false</param>
+				<param name="enableGZIP">true</param>
+				<param name="noCache">true</param>
+			</result>
+		</action>
+		<!-- 
+		<action name="index_*_*" class="com.opensymphony.xwork2.ActionSupport">
+			<result name="success">/jsp/admin/index_{1}.jsp?aaaa={2}</result>
+		</action>
+		-->
+
+		<action name="bgimg" class="com.opensymphony.xwork2.ActionSupport">
+			<result name="success">/jsp/admin/backgroudimg.jsp</result>
+		</action>
+
+
+		<action name="dict" class="com.c306.comm.dictionary.action.DictionaryAction">
+			<result name="list">/jsp/admin/dictionary/list.jsp</result>
+			<result name="edit">/jsp/admin/dictionary/edit.jsp</result>
+			<result name="ajax" type="json">
+				<param name="ignoreHierarchy">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="excludeProperties"></param>
+				<param name="enableSMD">false</param>
+				<param name="enableGZIP">true</param>
+				<param name="noCache">true</param>
+			</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success</param>
+				<param name="excludeProperties"></param>
+				<param name="enableSMD">false</param>
+				<param name="enableGZIP">true</param>
+				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="sysargs" class="com.c306.comm.sysargs.action.SystemArgumentsAction">
+			<result name="ajax" type="json">
+				<param name="ignoreHierarchy">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="excludeProperties"></param>
+				<param name="enableSMD">false</param>
+				<param name="enableGZIP">true</param>
+				<param name="noCache">true</param>
+			</result>
+			<result name="updateAppParams" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success</param>
+				<param name="excludeProperties"></param>
+				<param name="enableSMD">false</param>
+				<param name="enableGZIP">true</param>
+				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="aboutpractice" class="com.c306.code.article.action.AboutPracticeAction">
+			<interceptor-ref name="tokenStack"/>
+			<result name="success">/jsp/admin/about/edit_practice.jsp</result>
+			<result name="edit">/jsp/admin/about/edit_practice.jsp</result>
+		</action>
+		<action name="aboutpeople" class="com.c306.code.article.action.AboutPeopleAction">
+			<interceptor-ref name="tokenStack"/>
+			<result name="success">/jsp/admin/about/edit_people.jsp</result>
+			<result name="edit">/jsp/admin/about/edit_people.jsp</result>
+			<result name="list">/jsp/admin/about/list_people.jsp</result>
+		</action>
+		<action name="aboutcontact" class="com.c306.code.article.action.AboutPeopleAction">
+			<interceptor-ref name="tokenStack"/>
+			<result name="success">/jsp/admin/about/edit_contact.jsp</result>
+			<result name="edit">/jsp/admin/about/edit_contact.jsp</result>
+			<result name="list">/jsp/admin/about/list_contact.jsp</result>
+		</action>
+		<action name="aboutcollaboration" class="com.c306.code.article.action.AboutCollaborationAction">
+			<interceptor-ref name="tokenStack"/>
+			<result name="success">/jsp/admin/about/edit_collaboration.jsp</result>
+			<result name="edit">/jsp/admin/about/edit_collaboration.jsp</result>
+			<result name="list">/jsp/admin/about/list_collaboration.jsp</result>
+		</action>
+		<action name="products" class="com.c306.code.article.action.ArticleAction">
+			<interceptor-ref name="tokenStack"/>
+			<result name="success">/jsp/admin/article/list_work.jsp</result>
+			<result name="list">/jsp/admin/article/list_work.jsp</result>
+			<result name="edit">/jsp/admin/article/edit_work.jsp</result>
+			<result name="ajax" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success,items,items\[\d+\].*</param>
+				<param name="excludeProperties"></param>
+				<param name="enableSMD">false</param>
+				<param name="enableGZIP">true</param>
+				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="masonry" class="com.c306.code.masonry.action.MasonryBrickAction">
+			<result name="success">/jsp/admin/main.jsp</result>
+			<result name="gallery">/jsp/query/gallery.jsp</result>
+			<result name="ajax" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success</param>
+				<param name="excludeProperties"></param>
+				<param name="enableSMD">false</param>
+				<param name="enableGZIP">true</param>
+				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		
+
+		<action name="*" class="com.opensymphony.xwork2.ActionSupport">
+<!-- 			<result name="success">/jsp/admin/theme.jsp</result> -->
+<!-- 			<result name="success">/jsp/admin/main.jsp</result> -->
+<!--			<result type="redirect">/admin/2_article!list.action</result>-->
+			<result type="redirect">/admin/masonry.action</result>
+		</action>
+		
+	</package><!-- / end /admin -->
+	
+	<package name="mi" namespace="/mi" extends="admin">
+		
+		<action name="member" class="com.c306.core.springsecurity.users.action.UserAction">
+			<result type="dispatcher" name="tomodifyPwd">/jsp/admin/user/password.jsp</result>
+			<result type="dispatcher" name="modifyPwd">/jsp/admin/user/password.jsp</result>
+			<result type="dispatcher" name="modifyAdminPwd">/jsp/admin/user/modifyAdminPwd.jsp</result>
+			<result type="dispatcher" name="userinfo">/jsp/admin/user/UserInfomations.jsp</result>
+			<result type="redirect" name="front2manage">/j_spring_security_check</result>
+			<result name="list">/jsp/admin/user/list.jsp</result>
+			<result name="edit">/jsp/admin/user/edit.jsp</result>
+		</action>
+		<action name="order" class="com.c306.code.order.action.OrderAction">
+			<interceptor-ref name="tokenStack"/>
+			<result name="list">/jsp/admin/order/list.jsp</result>
+			<result name="edit">/jsp/admin/order/edit.jsp</result>
+			<result name="history_list">/jsp/admin/user/history_list1.jsp</result>
+			<result name="history_view">/jsp/admin/user/history_view1.jsp</result>
+			<result name="ajaxLineItem" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success</param>
+				<param name="excludeProperties"></param>
+				<param name="enableSMD">false</param>
+				<param name="enableGZIP">true</param>
+				<param name="noCache">true</param>
+			</result>
+		</action>
+	</package>
+	
+</struts>

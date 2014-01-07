@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="false">
+    <class name="com.c306.core.springsecurity.users.entity.SecUser" table="sec_user" dynamic-update="true" select-before-update="true">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="hilo">
+            	<param name="initialValue">5000</param>
+            	<param name="allocationSize">10</param>
+            	<!-- "hilo","pooled","pooled-lo" -->
+            	<param name="optimizer">hilo</param>
+            </generator>
+        </id>
+        <property name="username" type="java.lang.String" unique="true">
+            <column name="username" length="50" />
+        </property>
+        <property name="nicename" type="java.lang.String">
+        	<column name="nicename" length="250" />
+        </property>
+        <property name="firstName" type="java.lang.String">
+        	<column name="firstName" length="250" />
+        </property>
+        <property name="lastName" type="java.lang.String">
+        	<column name="lastName" length="250" />
+        </property>
+        <property name="password" type="java.lang.String" not-null="true" update="false">
+            <column name="password" length="255" />
+        </property>
+        <property name="passwordHint" type="java.lang.String">
+        	<column name="passwordHint" length="250" />
+        </property>
+        <property name="avatar" type="java.lang.String">
+            <column name="avatar" length="150" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email" length="100" />
+        </property>
+        <property name="qq" type="java.lang.String">
+            <column name="qq" length="20" />
+        </property>
+        <property name="msn" type="java.lang.String">
+            <column name="msn" length="100" />
+        </property>
+        <property name="tel" type="java.lang.String">
+            <column name="tel" length="20" />
+        </property>
+        <property name="mobile" type="java.lang.String">
+            <column name="mobile" length="20" />
+        </property>
+        <property name="country" type="java.lang.String">
+            <column name="country" length="100" />
+        </property>
+        <property name="province" type="java.lang.String">
+            <column name="province" length="100" />
+        </property>
+        <property name="city" type="java.lang.String">
+            <column name="city" length="100" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="address" length="200" />
+        </property>
+        <property name="descn" type="java.lang.String">
+            <column name="descn" length="200" />
+        </property>
+        <property name="invitcode" type="java.lang.String">
+            <column name="invitcode" length="150" />
+        </property>
+        <property name="createtime" type="java.sql.Timestamp" update="false">
+            <column name="createtime" length="19" not-null="true">
+            	<comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="updatetime" type="java.sql.Timestamp">
+            <column name="updatetime" length="19" not-null="true">
+            	<comment>最后修改时间</comment>
+            </column>
+        </property>
+        
+        <property name="enabled" type="boolean">
+            <column name="enabled" not-null="true">
+            	<comment></comment>
+            </column>
+        </property>
+        <property name="accountExpired" type="boolean">
+            <column name="accountExpired" not-null="true">
+            	<comment></comment>
+            </column>
+        </property>
+        <property name="accountLocked" type="boolean">
+            <column name="accountLocked" not-null="true">
+            	<comment></comment>
+            </column>
+        </property>
+        <property name="credentialsExpired" type="boolean">
+            <column name="credentialsExpired" not-null="true">
+            	<comment></comment>
+            </column>
+        </property>
+        
+        
+        
+		<!-- delete-orphan，只应用于one-to-many关联 -->
+        <set name="roles" inverse="false" fetch="select" table="sec_user_role">
+        	<key column="user_id"></key>
+        	<many-to-many column="role_id" class="com.c306.core.springsecurity.roles.entity.SecRole" not-found="ignore"/>
+        </set>
+    </class>
+</hibernate-mapping>

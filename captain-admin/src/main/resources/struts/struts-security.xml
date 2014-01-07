@@ -1,0 +1,81 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- security management -->
+	<package name="acegi" namespace="/acegi" extends="captain-default">
+		<interceptors>
+		
+			<interceptor-stack name="tokenStack">
+				<interceptor-ref name="token">
+                    <!-- <param name="excludeMethods">list,edit,export*</param> -->
+                    <param name="includeMethods">save*</param>
+                </interceptor-ref>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+			
+		</interceptors>
+		
+ 		<default-interceptor-ref name="tokenStack"/>
+		
+		
+		<!-- reload resources -->
+		<action name="reloadResource" class="com.opensymphony.xwork2.ActionSupport">
+			<result name="success">/jsp/admin/loadResource.jsp</result>
+		</action>
+
+		<!-- security management -->
+		<action name="login" class="com.opensymphony.xwork2.ActionSupport">
+			<result name="success">/jsp/admin/login_simple.jsp</result>
+		</action>
+		<action name="user" class="com.c306.core.springsecurity.users.action.SecUserAction">
+			<result name="input">/jsp/admin/security/list_SecUser.jsp</result>
+			<result name="list">/jsp/admin/security/list_SecUser.jsp</result>
+			<result name="role_user_list">/jsp/admin/security/sec_role_users.jsp</result>
+			<result name="edit">/jsp/admin/security/edit_SecUser.jsp</result>
+			<result name="modifyAdminPwd">/jsp/admin/user/modifyAdminPwd.jsp</result>
+			<result name="userinfo">/jsp/admin/user/UserInfomations.jsp</result>
+			<result type="redirect" name="front2manage">/j_spring_security_check</result>
+			<result name="export" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="UserList.xls"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success</param>
+				<param name="excludeProperties"></param>
+				<param name="enableSMD">false</param>
+				<param name="enableGZIP">true</param>
+				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="role" class="com.c306.core.springsecurity.roles.action.SecRoleAction">
+			<result name="list">/jsp/admin/security/list_SecRole.jsp</result>
+			<result name="edit">/jsp/admin/security/edit_SecRole.jsp</result>
+			<result name="input">/jsp/admin/security/edit_SecRole.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success,items,items\[\d+\].*</param>
+				<param name="excludeProperties"></param>
+				<param name="enableSMD">false</param>
+				<param name="enableGZIP">true</param>
+				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="resc" class="com.c306.core.springsecurity.resources.action.SecRescAction">
+			<result name="list">/jsp/admin/security/list_resc.jsp</result>
+			<result name="edit">/jsp/admin/security/edit_resc.jsp</result>
+			<result name="input">/jsp/admin/security/edit_resc.jsp</result>
+			<result name="role_resc_list">/jsp/admin/security/sec_role_resources.jsp</result>
+		</action>
+
+
+	</package>
+</struts>
