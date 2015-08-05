@@ -1,0 +1,15 @@
+.idea/
+.settings/
+target/
+build/
+
+
+*.class
+# Package Files #
+*.iml
+*.ipr
+*.iws
+document/
+.classpath
+.project
+.springBeans
